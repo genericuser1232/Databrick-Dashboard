@@ -1,5 +1,6 @@
 import os
 from databricks import sql
+from databricks.sdk.core import Config
 import pandas as pyarrow
 import streamlit as st 
 
@@ -8,13 +9,20 @@ st.set_page_config(
 )
 st.title(" Databricks Analytics Dashboard")
 
+config = Config(
+    host=os.getenv("DATABRICKS_SERVER_HOSTNAME"),
+    client_id=os.getenv("DATABRICKS_CLIENT_ID"),
+    client_secret=os.getenv("DATABRICKS_CLIENT_SECRET"),
+)
+
 # Initialize Databricks connection
 @st.cache_resource
 def init_connection():
     return sql.connect(
         server_hostname=os.getenv("DATABRICKS_SERVER_HOSTNAME"),
         http_path=os.getenv("DATABRICKS_HTTP_PATH"),
-        access_token=os.getenv("DATABRICKS_TOKEN"),
+        #access_token=os.getenv("DATABRICKS_TOKEN"),
+        credential_provider=lamda: cfg.authenticate()
     )
 
 try:
