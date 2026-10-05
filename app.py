@@ -22,7 +22,7 @@ try:
     st.success("Connected to Databricks successfully!")
 except Exception as e:
     st.error(f"Connection failed: {e}")
-    st.Stop()
+    st.stop()
 
 # Load data function
 @st.cache_data(ttl=600)
