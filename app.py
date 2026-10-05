@@ -1,36 +1,39 @@
 import os
 from databricks import sql
-from databricks.sdk.core import Config
+from databricks.sdk.core import Config, oauth_service_principal
 import pandas as pyarrow
 import streamlit as st
-import time
 
 st.set_page_config(
     page_title="Databricks Northflank Dashboard", layout="wide"
 )
 st.title(" Databricks Analytics Dashboard")
 
+server_hostname=os.getenv("DATABRICKS_SERVER_HOSTNAME")
+
 config = Config(
-    host=os.getenv("DATABRICKS_SERVER_HOSTNAME"),
+    host=f"https://{server_hostname}",
     auth_type="oauth-m2m",
     client_id=os.getenv("DATABRICKS_CLIENT_ID"),
     client_secret=os.getenv("DATABRICKS_CLIENT_SECRET"),
 )
 
+def credential_provider():
+    return oauth_service_principal(config)
+
 # Initialize Databricks connection
 @st.cache_resource
 def init_connection():
     return sql.connect(
-        server_hostname=os.getenv("DATABRICKS_SERVER_HOSTNAME"),
+        server_hostname=server_hostname,
         http_path=os.getenv("DATABRICKS_HTTP_PATH"),
         #access_token=os.getenv("DATABRICKS_TOKEN"),
-        credentials_provider=config.authenticate()
+        credentials_provider=credential_provider
     )
 
 try:
     conn=init_connection()
     st.success("Connected to Databricks successfully!")
-    time.sleep(5)
 except Exception as e:
     st.error(f"Connection failed: {e}")
     st.stop()
