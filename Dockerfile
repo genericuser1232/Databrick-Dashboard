@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 8501
 
-CMD ["python", "-m", "streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.headless=true"ss]
+CMD ["/usr/local/bin/python", "-m", "streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.headless=true"]
