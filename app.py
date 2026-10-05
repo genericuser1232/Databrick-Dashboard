@@ -11,6 +11,7 @@ st.title(" Databricks Analytics Dashboard")
 
 config = Config(
     host=os.getenv("DATABRICKS_SERVER_HOSTNAME"),
+    auth_type="oauth-m2m",
     client_id=os.getenv("DATABRICKS_CLIENT_ID"),
     client_secret=os.getenv("DATABRICKS_CLIENT_SECRET"),
 )
