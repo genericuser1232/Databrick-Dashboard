@@ -2,7 +2,8 @@ import os
 from databricks import sql
 from databricks.sdk.core import Config
 import pandas as pyarrow
-import streamlit as st 
+import streamlit as st
+import time
 
 st.set_page_config(
     page_title="Databricks Northflank Dashboard", layout="wide"
@@ -29,6 +30,7 @@ def init_connection():
 try:
     conn=init_connection()
     st.success("Connected to Databricks successfully!")
+    time.sleep(5)
 except Exception as e:
     st.error(f"Connection failed: {e}")
     st.stop()
