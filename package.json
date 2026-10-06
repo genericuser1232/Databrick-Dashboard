@@ -1,0 +1,17 @@
+{
+  "name": "nextjs-databricks-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@databricks/sql": "^1.2.0",
+    "lucide-react": "^1.16.0",
+    "next": "15.x",
+    "react": "19.x",
+    "react-dom": "19.x"
+  }
+}
