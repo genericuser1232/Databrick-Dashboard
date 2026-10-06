@@ -8,7 +8,7 @@ RUN npm install
 
 # Stage 2: Rebuild the source code only when needed
 FROM node:18-alpine AS builder
-WORKDIR /app
+WORKDIR /src/dashboard/app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
