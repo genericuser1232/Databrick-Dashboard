@@ -3,4 +3,4 @@ const nextConfig = {
   output: 'standalone',
 };
 
-export default companion = nextConfig; // or just export default nextConfig;
+export default nextConfig; // or just export default nextConfig;
