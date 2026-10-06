@@ -8,7 +8,7 @@ RUN npm install
 
 # Stage 2: Rebuild the source code only when needed
 FROM node:18-alpine AS builder
-WORKDIR /src/dashboard/app
+WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
@@ -21,6 +21,8 @@ RUN npm run build
 # Stage 3: Production image, copy all the files and run next
 FROM node:18-alpine AS runner
 WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
