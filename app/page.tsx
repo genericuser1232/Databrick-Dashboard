@@ -1,4 +1,4 @@
-"use client";
+import RequestTrendsChart from "@/components/RequestTrendsChart";
 
 type Metric = {
   title: string;
@@ -35,8 +35,6 @@ export default function DashboardPage() {
     .reduce((acc, s) => acc + s.requests, 0)
     .toLocaleString();
 
-  const bars = [28, 45, 42, 51, 48, 60, 57, 62, 58, 66, 72, 69, 74, 78];
-
   return (
     <main className="dashboard">
       <div className="container">
@@ -65,17 +63,8 @@ export default function DashboardPage() {
         </section>
 
         <section className="mid-grid">
-          <article className="card">
-            <div className="section-top">
-              <h2 className="section-title">Requests Trend</h2>
-              <span className="muted">Last 14 days</span>
-            </div>
-            <div className="chart-area">
-              {bars.map((h, i) => (
-                <div key={i} className="bar" style={{ height: `${h}%` }} />
-              ))}
-            </div>
-          </article>
+          {/* Replaced hardcoded bar chart with live component */}
+          <RequestTrendsChart />
 
           <article className="card">
             <h2 className="section-title">Key Insights</h2>
@@ -117,18 +106,6 @@ export default function DashboardPage() {
             </table>
           </div>
         </section>
-      </div>
-    </main>
-  );
-}
-
-import RequestTrendsChart from "@/components/RequestTrendsChart";
-
-export default function Page() {
-  return (
-    <main className="dashboard">
-      <div className="container">
-        <RequestTrendsChart />
       </div>
     </main>
   );
