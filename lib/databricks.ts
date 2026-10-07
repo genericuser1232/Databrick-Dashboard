@@ -16,7 +16,6 @@ export async function runQuery(query: string) {
       runAsync: true,
     });
 
-    await operation.waitUntilReady();
     const result = await operation.fetchAll();
     await operation.close();
 

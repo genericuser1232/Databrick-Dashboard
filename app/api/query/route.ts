@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import { NextRequest, NextResponse } from "next/server";
 import { runQuery } from "@/lib/databricks";
 
@@ -9,9 +11,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid query" }, { status: 400 });
     }
 
-    // Optional: add allowlist / validation to block dangerous queries
     const rows = await runQuery(query);
-
     return NextResponse.json({ rows });
   } catch (error: any) {
     return NextResponse.json(
