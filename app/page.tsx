@@ -1,77 +1,91 @@
 import RequestTrendsChart from "@/components/RequestTrendsChart";
 
-type Metric = {
-  title: string;
+type KPI = {
+  label: string;
   value: string;
-  change: number;
-  subtitle: string;
+  delta: number;
+  period: string;
 };
 
-const metrics: Metric[] = [
-  { title: "Total Requests", value: "1,284,221", change: 12.4, subtitle: "Last 30 days" },
-  { title: "Active Users", value: "18,392", change: 4.1, subtitle: "Last 30 days" },
-  { title: "Compute Cost", value: "$24,810", change: -3.2, subtitle: "vs previous month" },
-  { title: "Avg Query Time", value: "1.42s", change: -8.7, subtitle: "Performance improved" },
+const kpis: KPI[] = [
+  { label: "Total Requests", value: "1,284,221", delta: 12.4, period: "vs previous 30 days" },
+  { label: "Unique Users", value: "18,392", delta: 4.1, period: "vs previous 30 days" },
+  { label: "Avg Success Rate", value: "99.72%", delta: 0.3, period: "vs previous 30 days" },
+  { label: "Total Cost", value: "$24,810", delta: -3.2, period: "vs previous 30 days" },
 ];
 
-const serviceUsage = [
-  { service: "Data API", requests: 542200, successRate: "99.92%", p95: "820ms", cost: "$8,240" },
-  { service: "Batch Jobs", requests: 18210, successRate: "99.10%", p95: "2.4s", cost: "$5,930" },
-  { service: "Feature Store", requests: 294110, successRate: "99.80%", p95: "640ms", cost: "$4,180" },
-  { service: "SQL Analytics", requests: 429701, successRate: "99.55%", p95: "1.1s", cost: "$6,460" },
+const topServices = [
+  { name: "Data API", requests: 542200, cost: "$8,240" },
+  { name: "SQL Analytics", requests: 429701, cost: "$6,460" },
+  { name: "Feature Store", requests: 294110, cost: "$4,180" },
 ];
 
-function TrendBadge({ change }: { change: number }) {
-  const isUp = change >= 0;
+const breakdown = [
+  { service: "Data API", requests: 542200, success: "99.92%", p95: "820ms", cost: "$8,240" },
+  { service: "Batch Jobs", requests: 18210, success: "99.10%", p95: "2.4s", cost: "$5,930" },
+  { service: "Feature Store", requests: 294110, success: "99.80%", p95: "640ms", cost: "$4,180" },
+  { service: "SQL Analytics", requests: 429701, success: "99.55%", p95: "1.1s", cost: "$6,460" },
+];
+
+function DeltaBadge({ delta }: { delta: number }) {
+  const up = delta >= 0;
   return (
-    <span className={`badge ${isUp ? "up" : "down"}`}>
-      {isUp ? "↑" : "↓"} {Math.abs(change)}%
+    <span className={`badge ${up ? "up" : "down"}`}>
+      {up ? "↑" : "↓"} {Math.abs(delta)}%
     </span>
   );
 }
 
 export default function DashboardPage() {
-  const totalRequests = serviceUsage
-    .reduce((acc, s) => acc + s.requests, 0)
-    .toLocaleString();
+  const lastUpdated = "2026-10-07 09:00";
+  const selectedPeriod = "Last 30 days";
 
   return (
     <main className="dashboard">
       <div className="container">
         <header className="header">
           <div>
-            <p className="kicker">Service Monitoring</p>
-            <h1 className="title">Usage Dashboard</h1>
+            <p className="kicker">Service Usage Dashboard</p>
+            <h1 className="title">Operational Overview</h1>
+            <p className="muted" style={{ marginTop: 6 }}>
+              Last updated: {lastUpdated}
+            </p>
           </div>
           <div className="summary">
-            <p className="summary-label">Total service requests</p>
-            <p className="summary-value">{totalRequests}</p>
+            <p className="summary-label">Reporting Period</p>
+            <p className="summary-value">{selectedPeriod}</p>
           </div>
         </header>
 
         <section className="metrics-grid">
-          {metrics.map((m) => (
-            <article className="card" key={m.title}>
+          {kpis.map((kpi) => (
+            <article className="card" key={kpi.label}>
               <div className="card-top">
-                <p className="card-title">{m.title}</p>
-                <TrendBadge change={m.change} />
+                <p className="card-title">{kpi.label}</p>
+                <DeltaBadge delta={kpi.delta} />
               </div>
-              <p className="card-value">{m.value}</p>
-              <p className="card-subtitle">{m.subtitle}</p>
+              <p className="card-value">{kpi.value}</p>
+              <p className="card-subtitle">{kpi.period}</p>
             </article>
           ))}
         </section>
 
         <section className="mid-grid">
-          {/* Replaced hardcoded bar chart with live component */}
           <RequestTrendsChart />
 
           <article className="card">
-            <h2 className="section-title">Key Insights</h2>
-            <ul className="insights-list" style={{ marginTop: 12 }}>
-              <li className="insight-item">SQL Analytics usage increased after 9 AM daily.</li>
-              <li className="insight-item">Batch Jobs have highest p95 latency among services.</li>
-              <li className="insight-item">Overall cost reduced 3.2% vs last month.</li>
+            <div className="section-top">
+              <h2 className="section-title">Top Services by Requests</h2>
+            </div>
+            <ul className="insights-list">
+              {topServices.map((s) => (
+                <li className="insight-item" key={s.name}>
+                  <strong>{s.name}</strong>
+                  <div className="muted" style={{ marginTop: 4 }}>
+                    Requests: {s.requests.toLocaleString()} · Cost: {s.cost}
+                  </div>
+                </li>
+              ))}
             </ul>
           </article>
         </section>
@@ -93,11 +107,11 @@ export default function DashboardPage() {
                 </tr>
               </thead>
               <tbody>
-                {serviceUsage.map((row) => (
+                {breakdown.map((row) => (
                   <tr key={row.service}>
                     <td>{row.service}</td>
                     <td>{row.requests.toLocaleString()}</td>
-                    <td>{row.successRate}</td>
+                    <td>{row.success}</td>
                     <td>{row.p95}</td>
                     <td>{row.cost}</td>
                   </tr>
