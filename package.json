@@ -1,17 +1,25 @@
 {
-  "name": "nextjs-databricks-dashboard",
+  "name": "databricks-next-app",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p 3000",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@databricks/sql": "^1.2.0",
-    "lucide-react": "^1.16.0",
-    "next": "15.x",
-    "react": "19.x",
-    "react-dom": "19.x"
+    "@databricks/sql": "^1.8.0",
+    "next": "^14.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.5.3",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.5"
   }
 }
