@@ -121,3 +121,15 @@ export default function DashboardPage() {
     </main>
   );
 }
+
+import RequestTrendsChart from "@/components/RequestTrendsChart";
+
+export default function Page() {
+  return (
+    <main className="dashboard">
+      <div className="container">
+        <RequestTrendsChart />
+      </div>
+    </main>
+  );
+}
