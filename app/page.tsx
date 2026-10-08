@@ -73,6 +73,12 @@ export default function DashboardPage() {
           ))}
         </section>
 
+        <section className="progressbar">
+          <div className="section-top">
+              <h2 className="section-title">Migration Progress</h2>
+            </div>
+        </section>
+
         <section className="mid-grid">
           <RequestTrendsChart />
 

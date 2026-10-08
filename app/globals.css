@@ -143,6 +143,10 @@ body {
   margin-top: 14px;
 }
 
+.progressbar {
+  display: grid;
+}
+
 .section-title {
   margin: 0;
   font-size: 14px;
