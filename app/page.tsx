@@ -1,4 +1,5 @@
 import RequestTrendsChart from "@/components/RequestTrendsChart";
+import { handleExportCSV, type TableRow } from "@/components/Buttons";
 
 type KPI = {
   label: string;
@@ -93,7 +94,7 @@ export default function DashboardPage() {
         <section className="card table-card">
           <div className="section-top">
             <h2 className="section-title">Service Breakdown</h2>
-            <button className="btn">Export CSV</button>
+            <button className="btn"  onClick={handleExportCSV}>Export CSV</button>
           </div>
           <div className="table-wrap">
             <table>
