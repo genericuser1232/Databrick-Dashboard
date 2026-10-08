@@ -96,7 +96,7 @@ export default function DashboardPage() {
             <h2 className="section-title">Service Breakdown</h2>
             <ExportCsvButton rows={breakdown} fileName="users.csv" className="btn" />
           </div>
-          <div className="table-wrap">
+          <div className="table-scroll">
             <table>
               <thead>
                 <tr>

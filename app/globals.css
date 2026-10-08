@@ -200,6 +200,18 @@ body {
 
 .table-card {
   margin-top: 14px;
+  overflow: hidden;
+}
+
+.table-scroll {
+  max-height: 420px;   /* adjust height */
+  overflow-y: auto;    /* vertical scroll only */
+  overflow-x: hidden;  /* no horizontal scroll */
+}
+
+.table-scroll table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .table-wrap {
