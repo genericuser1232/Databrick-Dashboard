@@ -32,6 +32,9 @@ const breakdown = [
   { service: "SQL Analytics", requests: 429701, success: "99.55%", p95: "1.1s", cost: "$6,460" },
 ];
 
+const [progress, setProgress] = useState(30);
+
+
 function DeltaBadge({ delta }: { delta: number }) {
   const up = delta >= 0;
   return (
