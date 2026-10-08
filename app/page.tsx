@@ -1,5 +1,5 @@
 import RequestTrendsChart from "@/components/RequestTrendsChart";
-import { handleExportCSV, type TableRow } from "@/components/Buttons";
+import ExportCsvButton, { type TableRow } from "@/components/ExportCsvButton";
 
 type KPI = {
   label: string;
