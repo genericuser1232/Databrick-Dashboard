@@ -11,6 +11,7 @@ export default function RequestTrendsChart() {
   const [rows, setRows] = useState<TrendRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const period = 'Last 14 days';
 
   useEffect(() => {
     const load = async () => {
@@ -46,7 +47,18 @@ export default function RequestTrendsChart() {
     <article className="card">
       <div className="section-top">
         <h2 className="section-title">Request Trends</h2>
-        <span className="muted">Last {rows.length} days</span>
+        <label htmlFor="status" style={{ display: 'block', marginBottom: 8 }}>
+          Period
+        </label>
+        <select
+          id="period"
+          name="period"
+          defaultValue={period}
+          style={{ padding: '8px 10px', minWidth: 220 }}
+        >
+          <option value="last_7_days">Last 7 days</option>
+          <option value="last_14_days">Last 14 days</option>
+        </select>
       </div>
 
       <div className="chart-area">
