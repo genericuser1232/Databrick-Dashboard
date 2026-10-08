@@ -26,6 +26,8 @@ const breakdown = [
   { service: "Batch Jobs", requests: 18210, success: "99.10%", p95: "2.4s", cost: "$5,930" },
   { service: "Feature Store", requests: 294110, success: "99.80%", p95: "640ms", cost: "$4,180" },
   { service: "SQL Analytics", requests: 429701, success: "99.55%", p95: "1.1s", cost: "$6,460" },
+  { service: "SQL Analytics", requests: 429701, success: "99.55%", p95: "1.1s", cost: "$6,460" },
+  { service: "SQL Analytics", requests: 429701, success: "99.55%", p95: "1.1s", cost: "$6,460" },
 ];
 
 function DeltaBadge({ delta }: { delta: number }) {
