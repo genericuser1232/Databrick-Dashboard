@@ -94,7 +94,7 @@ export default function DashboardPage() {
         <section className="card table-card">
           <div className="section-top">
             <h2 className="section-title">Service Breakdown</h2>
-            <ExportCsvButton rows={tableData} fileName="users.csv" className="btn" />
+            <ExportCsvButton rows={breakdown} fileName="users.csv" className="btn" />
           </div>
           <div className="table-wrap">
             <table>
