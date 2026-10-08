@@ -1,5 +1,7 @@
 import RequestTrendsChart from "@/components/RequestTrendsChart";
 import ExportCsvButton, { type TableRow } from "@/components/Buttons";
+import { useState } from 'react';
+import Bar from '@/components/Bars';
 
 type KPI = {
   label: string;
@@ -77,6 +79,39 @@ export default function DashboardPage() {
           <article className="card">
             <div className="section-top">
               <h2 className="section-title">Migration Progress</h2>
+              <main
+              style={{
+                maxWidth: '520px',
+                margin: '40px auto',
+                padding: '0 16px',
+                fontFamily: 'Arial, sans-serif',
+              }}
+              >
+                <h1 style={{ marginBottom: '16px' }}>Progress Bar Demo</h1>
+
+                <Bar value={progress} />
+
+                <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
+                  <button
+                    onClick={() => setProgress((p) => Math.max(0, p - 10))}
+                    style={{ padding: '8px 12px', cursor: 'pointer' }}
+                  >
+                    -10
+                  </button>
+                  <button
+                    onClick={() => setProgress((p) => Math.min(100, p + 10))}
+                    style={{ padding: '8px 12px', cursor: 'pointer' }}
+                  >
+                    +10
+                  </button>
+                  <button
+                    onClick={() => setProgress(0)}
+                    style={{ padding: '8px 12px', cursor: 'pointer' }}
+                  >
+                    Reset
+                  </button>
+                </div>
+              </main>
             </div>
           </article>
         </section>

@@ -145,6 +145,8 @@ body {
 
 .progressbar {
   display: grid;
+  gap: 14px;
+  margin-top: 14px;
 }
 
 .section-title {
