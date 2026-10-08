@@ -47,9 +47,6 @@ export default function RequestTrendsChart() {
     <article className="card">
       <div className="section-top">
         <h2 className="section-title">Request Trends</h2>
-        <label htmlFor="status" style={{ display: 'block', marginBottom: 8 }}>
-          Period
-        </label>
         <select
           id="period"
           name="period"
