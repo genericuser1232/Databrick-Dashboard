@@ -82,7 +82,8 @@ export default function DashboardPage() {
           <article className="card">
             <div className="section-top">
               <h2 className="section-title">Migration Progress</h2>
-              <main
+            </div>
+            <main
               style={{
                 maxWidth: '520px',
                 margin: '40px auto',
@@ -90,9 +91,8 @@ export default function DashboardPage() {
                 fontFamily: 'Arial, sans-serif',
               }}
               >
-                <Bar value={progress} />
-              </main>
-            </div>
+              <Bar value={progress} />
+            </main>
           </article>
         </section>
 
