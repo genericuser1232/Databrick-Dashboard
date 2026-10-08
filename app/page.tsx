@@ -32,7 +32,7 @@ const breakdown = [
   { service: "SQL Analytics", requests: 429701, success: "99.55%", p95: "1.1s", cost: "$6,460" },
 ];
 
-const [progress, setProgress] = useState(30);
+const progress = 30;
 
 
 function DeltaBadge({ delta }: { delta: number }) {
@@ -90,30 +90,9 @@ export default function DashboardPage() {
                 fontFamily: 'Arial, sans-serif',
               }}
               >
-                <h1 style={{ marginBottom: '16px' }}>Progress Bar Demo</h1>
+                <h1 style={{ marginBottom: '16px' }}>Task Progress</h1>
 
                 <Bar value={progress} />
-
-                <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
-                  <button
-                    onClick={() => setProgress((p) => Math.max(0, p - 10))}
-                    style={{ padding: '8px 12px', cursor: 'pointer' }}
-                  >
-                    -10
-                  </button>
-                  <button
-                    onClick={() => setProgress((p) => Math.min(100, p + 10))}
-                    style={{ padding: '8px 12px', cursor: 'pointer' }}
-                  >
-                    +10
-                  </button>
-                  <button
-                    onClick={() => setProgress(0)}
-                    style={{ padding: '8px 12px', cursor: 'pointer' }}
-                  >
-                    Reset
-                  </button>
-                </div>
               </main>
             </div>
           </article>
