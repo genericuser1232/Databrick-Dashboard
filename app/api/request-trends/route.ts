@@ -11,7 +11,13 @@ export async function GET() {
       LIMIT 14
     `);
 
-    return NextResponse.json({ rows });
+    return NextResponse.json({ rows },
+    {
+			headers: {
+			"Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+			},
+		}  
+    );
   } catch (error: any) {
     return NextResponse.json({ error: error?.message || "Failed" }, { status: 500 });
   }
