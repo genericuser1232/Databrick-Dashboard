@@ -94,7 +94,7 @@ export default function DashboardPage() {
         <section className="card table-card">
           <div className="section-top">
             <h2 className="section-title">Service Breakdown</h2>
-            <button className="btn"  onClick={() => handleExportCSV(breakdown, "users.csv")}>Export CSV</button>
+            <ExportCsvButton rows={tableData} fileName="users.csv" className="btn" />
           </div>
           <div className="table-wrap">
             <table>

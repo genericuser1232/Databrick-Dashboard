@@ -1,5 +1,12 @@
-// components/Buttons.ts
+"use client";
+
 export type TableRow = Record<string, string | number | boolean | null | undefined>;
+
+type ExportCsvButtonProps = {
+  rows: TableRow[];
+  fileName?: string;
+  className?: string;
+};
 
 const convertToCSV = (rows: TableRow[]): string => {
   if (!rows.length) return "";
@@ -19,7 +26,7 @@ const convertToCSV = (rows: TableRow[]): string => {
   return [headerRow, ...dataRows].join("\n");
 };
 
-export const handleExportCSV = (rows: TableRow[], fileName = "table-data.csv"): void => {
+const handleExportCSV = (rows: TableRow[], fileName: string) => {
   const csv = convertToCSV(rows);
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
   const url = URL.createObjectURL(blob);
@@ -31,3 +38,15 @@ export const handleExportCSV = (rows: TableRow[], fileName = "table-data.csv"): 
 
   URL.revokeObjectURL(url);
 };
+
+export default function ExportCsvButton({
+  rows,
+  fileName = "table-data.csv",
+  className = "btn",
+}: ExportCsvButtonProps) {
+  return (
+    <button className={className} onClick={() => handleExportCSV(rows, fileName)}>
+      Export CSV
+    </button>
+  );
+}
