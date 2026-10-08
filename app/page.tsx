@@ -90,8 +90,6 @@ export default function DashboardPage() {
                 fontFamily: 'Arial, sans-serif',
               }}
               >
-                <h1 style={{ marginBottom: '16px' }}>Task Progress</h1>
-
                 <Bar value={progress} />
               </main>
             </div>
